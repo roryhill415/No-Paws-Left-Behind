@@ -74,7 +74,7 @@
     .hero {
       min-height: 100vh;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 55% 45%;
       align-items: center;
       padding: 120px 60px 80px;
       gap: 60px;
@@ -101,12 +101,13 @@
     .hero-left {
       position: relative; z-index: 1;
       display: flex; flex-direction: column; align-items: flex-start;
+      text-align: left;
     }
     .hero-org-name {
       font-family: 'Lora', serif;
-      font-size: 0.95rem; font-weight: 600;
+      font-size: clamp(1.6rem, 3vw, 2.6rem); font-weight: 700;
       color: var(--red);
-      letter-spacing: 0.02em;
+      letter-spacing: 0.01em;
       margin-bottom: 16px;
       animation: fadeUp 0.8s ease forwards; opacity: 0;
     }
@@ -123,7 +124,7 @@
     }
     .hero h1 {
       font-family: 'Lora', serif;
-      font-size: clamp(2.4rem, 4vw, 4.2rem);
+      font-size: clamp(3rem, 5vw, 5.5rem);
       font-weight: 700; line-height: 1.15;
       color: var(--text);
       margin-bottom: 20px;
@@ -558,7 +559,7 @@
   <nav>
     <div class="nav-logo">
       <!-- PLACEHOLDER: Logo image -->
-      <div class="logo-placeholder">Logo Here</div>
+      <img src="https://raw.githubusercontent.com/roryhill415/No-Paws-Left-Behind/main/logo2.png" alt="No Paws Left Behind Rescue" style="height:44px; width:auto; display:block;"/>
     </div>
     <ul class="nav-links">
       <li><a href="#mission">Mission</a></li>
@@ -573,10 +574,10 @@
   <section class="hero">
     <div class="hero-left">
       <div class="hero-org-name">No Paws Left Behind Rescue</div>
-      <div class="hero-tag">🐶 Dog & Cat Transport Rescue · California 🐱</div>
+
       <h1>California's rescue<br/>moving pets from the<br/><em>Central Valley</em><br/>to Bay Area homes.</h1>
       <p class="hero-sub">We transport at-risk dogs and cats from overcrowded kill shelters in Bakersfield, Fresno, and Modesto to SF Bay Area rescue partners — where adopters are waiting and kennels have room.</p>
-      <p class="hero-theresa">Run by Theresa, one person making a real difference.</p>
+
       <div class="hero-buttons">
         <a href="#support" class="btn-primary">Donate to the Cause</a>
         <a href="https://www.facebook.com/profile.php?id=100067309983141" target="_blank" class="btn-secondary">Follow on Facebook</a>
@@ -586,10 +587,7 @@
       <div class="van-scene">
         <div class="van-wrap">
           <!-- PLACEHOLDER: Van / hero image -->
-          <div class="van-img-placeholder">
-            <span class="ph-icon">🚐</span>
-            Van Image Here
-          </div>
+          <img src="https://raw.githubusercontent.com/roryhill415/No-Paws-Left-Behind/main/logo2.png" alt="No Paws Left Behind Rescue" style="width:100%; height:auto; display:block;"/>
         </div>
         <div class="road-line"></div>
       </div>
@@ -612,7 +610,7 @@
       <div class="stat-label">Dogs & Cats</div>
     </div>
     <div class="stat-item">
-      <div class="stat-num">$0</div>
+      <div class="stat-num">0</div>
       <div class="stat-label">Paid Staff — Zero</div>
     </div>
     <div class="stat-item">
@@ -639,91 +637,11 @@
       <div>
         <div class="route-visual">
           <div class="route-title">The Route We Drive</div>
-          <div class="map-svg-wrap">
-            <svg viewBox="0 0 320 520" xmlns="http://www.w3.org/2000/svg" style="font-family:'Nunito',sans-serif; width:100%; height:auto; display:block;">
-
-
-
-              <!-- Ocean shading - accurate CA coastal shape with SF Bay indent -->
-              <path d="
-                M 0 0 L 0 520 L 85 520 L 75 490 L 60 460 L 50 430 L 48 400 L 55 370 L 52 340 L 50 310 L 48 280
-                L 52 260 L 58 245 L 62 235 L 55 225 L 45 215 L 40 205 L 42 195 L 50 188
-                L 60 182 L 68 178 L 72 170 L 70 160 L 62 150 L 55 140 L 50 125 L 48 108
-                L 52 90 L 58 75 L 65 60 L 70 45 L 68 30 L 0 0 Z"
-                fill="#ddeef7" opacity="0.6"/>
-
-              <!-- SF Bay shading - the bay cutting inland east of SF -->
-              <path d="
-                M 68 78 L 78 82 L 88 88 L 95 96 L 98 106 L 96 116 L 90 122 L 82 126
-                L 76 130 L 72 138 L 70 148 L 68 158 L 66 168 L 68 178 L 62 175
-                L 58 165 L 56 155 L 56 144 L 58 132 L 62 122 L 64 112 L 62 100 L 62 90 L 65 82 Z"
-                fill="#ddeef7" opacity="0.8"/>
-
-              <!-- Hwy 99 road -->
-              <path d="M 152 420 L 150 390 L 148 360 L 146 330 L 145 300 L 144 270 L 143 240 L 142 210 L 141 180 L 140 155"
-                stroke="#d4b896" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-
-              <!-- Hwy 99 label -->
-              <rect x="155" y="295" width="32" height="16" rx="4" fill="#d4b896"/>
-              <text x="171" y="307" text-anchor="middle" font-size="8" font-weight="800" fill="white">HWY 99</text>
-
-              <!-- Route from Bakersfield to SF — animated path -->
-              <path id="routePath"
-                d="M 152 420 L 150 390 L 148 360 L 146 330 L 145 300 L 144 270 L 143 240 L 142 210 L 141 180 L 140 155 L 138 130 L 128 108 L 110 90 L 90 78 L 75 68"
-                stroke="#C0392B" stroke-width="3" fill="none"
-                stroke-linecap="round" stroke-linejoin="round"
-                stroke-dasharray="600" stroke-dashoffset="600"
-                opacity="0.85">
-                <animate attributeName="stroke-dashoffset" from="600" to="0" dur="2.5s" begin="0.5s" fill="freeze" calcMode="ease"/>
-              </path>
-
-              <!-- Van icon animated along path -->
-              <g id="vanMarker" opacity="0">
-                <animate attributeName="opacity" from="0" to="1" dur="0.1s" begin="0.5s" fill="freeze"/>
-                <animateMotion dur="2.5s" begin="0.5s" fill="freeze" calcMode="ease" rotate="auto">
-                  <mpath href="#routePath"/>
-                </animateMotion>
-                <rect x="-12" y="-8" width="24" height="16" rx="4" fill="#C0392B"/>
-                <text x="0" y="5" text-anchor="middle" font-size="11">🚐</text>
-              </g>
-
-              <!-- City stop: Bakersfield (start) -->
-              <circle cx="152" cy="422" r="9" fill="#C0392B" stroke="white" stroke-width="2.5"/>
-              <text x="165" y="420" font-size="10.5" font-weight="800" fill="#2d2420">Bakersfield</text>
-              <text x="165" y="431" font-size="8.5" fill="#7a6a62">+ Wasco · Delano</text>
-
-              <!-- Tulare -->
-              <circle cx="147" cy="373" r="6" fill="#7a5c4a" stroke="white" stroke-width="2"/>
-              <text x="157" y="377" font-size="10" font-weight="700" fill="#2d2420">Tulare</text>
-
-              <!-- Fresno -->
-              <circle cx="145" cy="332" r="7" fill="#7a5c4a" stroke="white" stroke-width="2"/>
-              <text x="155" y="336" font-size="10.5" font-weight="700" fill="#2d2420">Fresno</text>
-
-              <!-- Modesto -->
-              <circle cx="143" cy="262" r="6" fill="#7a5c4a" stroke="white" stroke-width="2"/>
-              <text x="153" y="266" font-size="10" font-weight="700" fill="#2d2420">Modesto</text>
-
-              <!-- Stockton -->
-              <circle cx="143" cy="228" r="6" fill="#7a5c4a" stroke="white" stroke-width="2"/>
-              <text x="153" y="232" font-size="10" font-weight="700" fill="#2d2420">Stockton</text>
-
-              <!-- SF Bay Area (destination) -->
-              <circle cx="75" cy="68" r="11" fill="#2d2420" stroke="white" stroke-width="2.5"/>
-              <text x="90" y="65" font-size="11" font-weight="800" fill="#2d2420">San Francisco</text>
-              <text x="90" y="77" font-size="8.5" fill="#7a6a62">Bay Area Partners</text>
-
-              <!-- North arrow -->
-              <g transform="translate(272, 60)">
-                <circle cx="0" cy="0" r="16" fill="white" stroke="#ddd3c4" stroke-width="1"/>
-                <text x="0" y="-4" text-anchor="middle" font-size="8" font-weight="800" fill="#7a6a62">N</text>
-                <path d="M 0 -12 L 3 -2 L 0 0 L -3 -2 Z" fill="#C0392B"/>
-                <path d="M 0 12 L 3 2 L 0 0 L -3 2 Z" fill="#ddd3c4"/>
-              </g>
-
-            </svg>
-          </div>
-
+          <img
+            src="https://raw.githubusercontent.com/roryhill415/No-Paws-Left-Behind/main/route_map_v5.png"
+            alt="Route map from Bakersfield to San Francisco Bay Area"
+            style="width:100%; border-radius: var(--radius-sm); display:block;"
+          />
         </div>
       </div>
     </div>
@@ -846,7 +764,7 @@
   <!-- FOOTER -->
   <footer>
     <div class="footer-left">
-      <div class="footer-logo">No Paws Left Behind Rescue</div>
+      <img src="https://raw.githubusercontent.com/roryhill415/No-Paws-Left-Behind/main/logo2.png" alt="No Paws Left Behind Rescue" style="height:40px; width:auto; display:block; margin-bottom:12px;"/>
       <p>Moving California dogs and cats from overcrowded Central Valley shelters to loving Bay Area homes — one transport at a time.</p>
       <div class="footer-contact">
         <div>Based in Bakersfield, California</div>
