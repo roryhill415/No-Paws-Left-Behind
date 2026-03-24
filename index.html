@@ -73,14 +73,21 @@
     /* ── HERO ── */
     .hero {
       min-height: 100vh;
-      display: grid;
-      grid-template-columns: 55% 45%;
+      display: flex;
       align-items: center;
+      justify-content: center;
       padding: 120px 60px 80px;
-      gap: 60px;
       background: var(--cream);
       position: relative;
       overflow: hidden;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 60px;
+      width: 100%;
+      max-width: 1200px;
     }
     .hero::before {
       content: '';
@@ -179,10 +186,17 @@
       position: relative; z-index: 1;
       display: flex; align-items: center; justify-content: center;
     }
-    .van-scene { position: relative; width: 100%; max-width: 500px; }
+    .van-scene { position: relative; width: 100%; }
     .van-wrap {
       animation: vanFloat 3.5s ease-in-out infinite alternate;
       filter: drop-shadow(0 16px 32px rgba(120,80,60,0.18));
+    }
+    .van-wrap img {
+      width: 100%;
+      max-width: 520px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
     }
     @keyframes vanFloat {
       from { transform: translateY(0); }
@@ -362,33 +376,46 @@
       gap: 24px;
     }
     .how-card {
-      background: var(--white);
       border-radius: var(--radius);
       overflow: hidden;
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow-lg);
       transition: transform 0.25s, box-shadow 0.25s;
+      position: relative;
+      min-height: 380px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      background-size: cover;
+      background-position: center;
+    }
+    .how-card::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(20,10,8,0.82) 0%, rgba(20,10,8,0.35) 55%, rgba(20,10,8,0.10) 100%);
+      border-radius: var(--radius);
+      z-index: 0;
+      transition: background 0.3s;
     }
     .how-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
-    .how-card-photo {
-      width: 100%; height: 210px;
-      object-fit: cover; display: block;
-      transition: transform 0.4s ease;
+    .how-card:hover::after {
+      background: linear-gradient(to top, rgba(20,10,8,0.90) 0%, rgba(20,10,8,0.45) 55%, rgba(20,10,8,0.15) 100%);
     }
-    .how-card:hover .how-card-photo { transform: scale(1.04); }
-    .how-card-body { padding: 28px; }
+    .how-card-body {
+      padding: 32px 28px;
+      position: relative; z-index: 1;
+    }
     .how-num {
       display: inline-flex; align-items: center; justify-content: center;
       width: 32px; height: 32px;
-      background: var(--red-soft); border-radius: 50%;
-      font-size: 0.8rem; font-weight: 800; color: var(--red);
+      background: var(--red); border-radius: 50%;
+      font-size: 0.8rem; font-weight: 800; color: white;
       margin-bottom: 14px;
     }
     .how-card h3 {
       font-family: 'Lora', serif;
-      font-size: 1.15rem; font-weight: 700;
-      color: var(--text); margin-bottom: 10px;
+      font-size: 1.2rem; font-weight: 700;
+      color: #ffffff; margin-bottom: 10px;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.4);
     }
-    .how-card p { font-size: 0.88rem; color: var(--text-soft); line-height: 1.72; }
+    .how-card p { font-size: 0.88rem; color: rgba(255,255,255,0.85); line-height: 1.72; }
 
     /* ── ADOPT ── */
     .adopt-section {
@@ -531,7 +558,8 @@
     @media (max-width: 900px) {
       nav { padding: 14px 20px; }
       .nav-links { display: none; }
-      .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; gap: 40px; }
+      .hero { padding: 100px 24px 60px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
       .hero::before, .hero::after { display: none; }
       .hero-left { align-items: center; text-align: center; }
       .hero-theresa { justify-content: center; }
@@ -542,6 +570,7 @@
       .mission-grid { grid-template-columns: 1fr; gap: 40px; }
       .how-section { padding: 72px 24px; }
       .how-cards { grid-template-columns: 1fr; gap: 16px; }
+      .how-card { min-height: 300px; }
       .adopt-section { grid-template-columns: 1fr; padding: 72px 24px; gap: 40px; }
       .photos-section { padding: 72px 24px; }
       .photo-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
@@ -572,6 +601,7 @@
 
   <!-- HERO -->
   <section class="hero">
+    <div class="hero-inner">
     <div class="hero-left">
       <div class="hero-org-name">No Paws Left Behind Rescue</div>
 
@@ -591,6 +621,7 @@
         </div>
         <div class="road-line"></div>
       </div>
+    </div>
     </div>
   </section>
 
@@ -631,7 +662,7 @@
         <p class="section-body">We are a transport-only organization. We don't adopt animals out ourselves — we partner with licensed 501(c)3 Bay Area rescue organizations who handle adoptions. Our job is simply to get them there safely.</p>
         <div class="mission-quote">
           <p>"There is no better, quicker, more efficient way to save lives than by moving animals to an area where they are in great demand."</p>
-          <cite>— Theresa, Founder</cite>
+          <cite>— Teresa, Founder</cite>
         </div>
       </div>
       <div>
@@ -655,24 +686,21 @@
         <h2 class="section-title">The Road to a Forever Home</h2>
       </div>
       <div class="how-cards">
-        <div class="how-card">
-          <img class="how-card-photo" src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80" alt="Dog at shelter waiting"/>
+        <div class="how-card" style="background-image: url('https://raw.githubusercontent.com/roryhill415/No-Paws-Left-Behind/main/photos/72695741_776607522759833_8584593203166969856_n.jpg')">
           <div class="how-card-body">
             <div class="how-num">1</div>
             <h3>Rescues Choose the Animals</h3>
             <p>Our Bay Area rescue partners identify the dogs and cats they want to pull — they let us know who needs transport and we coordinate the pickup.</p>
           </div>
         </div>
-        <div class="how-card">
-          <img class="how-card-photo" src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600&q=80" alt="Cat waiting for transport"/>
+        <div class="how-card" style="background-image: url('https://raw.githubusercontent.com/roryhill415/No-Paws-Left-Behind/main/photos/605878530_1169920408594948_1519722281810088557_n.jpg')">
           <div class="how-card-body">
             <div class="how-num">2</div>
             <h3>We Drive Them North</h3>
             <p>Dogs and cats are personally transported from Bakersfield, Fresno, and Modesto directly to Bay Area rescue partners — hundreds of miles closer to a home.</p>
           </div>
         </div>
-        <div class="how-card">
-          <img class="how-card-photo" src="https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?w=600&q=80" alt="Happy pet finding a home"/>
+        <div class="how-card" style="background-image: url('https://raw.githubusercontent.com/roryhill415/No-Paws-Left-Behind/main/photos/605723858_1169920175261638_7780349771373119377_n.jpg')">
           <div class="how-card-body">
             <div class="how-num">3</div>
             <h3>Partners Find Them Homes</h3>
@@ -707,27 +735,27 @@
     </div>
     <div class="photo-grid">
       <div class="photo-grid-item featured">
-        <img src="https://images.unsplash.com/photo-1537151625747-768eb6cf92b2?w=800&q=80" alt="Dog rescued from shelter"/>
+        <img src="https://raw.githubusercontent.com/roryhill415/No-Paws-Left-Behind/main/photos/458698324_2015216088898964_2450296324780756633_n.jpg" alt="Dog rescued from shelter"/>
         <div class="photo-grid-caption">Every transport is a second chance</div>
       </div>
       <div class="photo-grid-item">
-        <img src="https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?w=600&q=80" alt="Cat waiting for transport"/>
+        <img src="https://raw.githubusercontent.com/roryhill415/No-Paws-Left-Behind/main/photos/471168565_2097695807317658_1250428455579156368_n.jpg" alt="Animal waiting for transport"/>
         <div class="photo-grid-caption">Waiting for a ride north</div>
       </div>
       <div class="photo-grid-item">
-        <img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=600&q=80" alt="Dog portrait"/>
+        <img src="https://raw.githubusercontent.com/roryhill415/No-Paws-Left-Behind/main/photos/481295706_940189031568088_4619009301966587983_n.jpg" alt="Dog portrait"/>
         <div class="photo-grid-caption">On the way to a forever home</div>
       </div>
       <div class="photo-grid-item">
-        <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?w=600&q=80" alt="Cat portrait"/>
+        <img src="https://raw.githubusercontent.com/roryhill415/No-Paws-Left-Behind/main/photos/482067737_940188621568129_2238922055722092378_n.jpg" alt="Animal portrait"/>
         <div class="photo-grid-caption">Safe and heading home</div>
       </div>
       <div class="photo-grid-item">
-        <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=600&q=80" alt="Dogs together"/>
+        <img src="https://raw.githubusercontent.com/roryhill415/No-Paws-Left-Behind/main/photos/605507085_1169920901928232_6844875451875161120_n.jpg" alt="Animals together"/>
         <div class="photo-grid-caption">No paw gets left behind</div>
       </div>
     </div>
-    <p class="photos-cta">Follow along on <a href="https://www.facebook.com/profile.php?id=100067309983141" target="_blank">Facebook</a> to meet the real dogs and cats Theresa is currently transporting.</p>
+    <p class="photos-cta">Follow along on <a href="https://www.facebook.com/profile.php?id=100067309983141" target="_blank">Facebook</a> to meet the real dogs and cats Teresa is currently transporting.</p>
   </div>
 
   <!-- SUPPORT -->
@@ -740,16 +768,23 @@
       <div class="support-cards">
         <div class="support-card">
           <div class="icon">💛</div>
-          <h3>Donate</h3>
-          <p>Fuel, transport costs, health certificates, and supplies — every run has real expenses. There are no paid staff. Every dollar you donate goes straight toward moving animals from danger to safety.</p>
-          <!-- PLACEHOLDER: Replace href with real donation link -->
-          <a href="#" class="card-btn primary-btn">Donate Now</a>
+          <h3>Donate via PayPal</h3>
+          <p>Fuel, transport costs, health certificates, and supplies — every run has real expenses. There are no paid staff. Every dollar goes straight toward moving animals from danger to safety.</p>
+          <img src="https://raw.githubusercontent.com/roryhill415/No-Paws-Left-Behind/main/paypal-qr.png" alt="PayPal QR Code for No Paws Left Behind Rescue" style="width:160px; height:160px; margin: 16px auto 8px; display:block; border-radius: 12px;"/>
+          <p style="font-size:0.8rem; color:var(--text-soft); text-align:center; margin-bottom:8px;">Scan to donate via PayPal</p>
         </div>
         <div class="support-card">
-          <div class="icon">📦</div>
-          <h3>Donate Supplies</h3>
-          <p>Transport runs need crates, carriers, leashes, blankets, food, water bowls, and more. Donating supplies directly reduces costs and keeps the animals comfortable on the road.</p>
-          <a href="https://www.facebook.com/profile.php?id=100067309983141" target="_blank" class="card-btn">Get in Touch</a>
+          <div class="icon">📱</div>
+          <h3>Donate via Zelle</h3>
+          <p>Send directly via Zelle — fast, free, and 100% of your donation goes toward transport costs.</p>
+          <div style="background:var(--warm); border-radius:var(--radius-sm); padding:16px; margin:16px 0; text-align:center;">
+            <div style="font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--brown); margin-bottom:6px;">Zelle Number</div>
+            <div style="font-size:1.4rem; font-weight:800; color:var(--text);">661-304-3332</div>
+          </div>
+          <div style="background:var(--warm); border-radius:var(--radius-sm); padding:16px; text-align:center;">
+            <div style="font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--brown); margin-bottom:6px;">Mail a Check</div>
+            <div style="font-size:0.9rem; font-weight:600; color:var(--text); line-height:1.6;">No Paws Left Behind Rescue<br/>P.O. Box 22755<br/>Bakersfield, CA 93309</div>
+          </div>
         </div>
         <div class="support-card">
           <div class="icon">📣</div>
@@ -767,7 +802,8 @@
       <img src="https://raw.githubusercontent.com/roryhill415/No-Paws-Left-Behind/main/logo2.png" alt="No Paws Left Behind Rescue" style="height:40px; width:auto; display:block; margin-bottom:12px;"/>
       <p>Moving California dogs and cats from overcrowded Central Valley shelters to loving Bay Area homes — one transport at a time.</p>
       <div class="footer-contact">
-        <div>Based in Bakersfield, California</div>
+        <div>P.O. Box 22755, Bakersfield, CA 93309</div>
+        <div>Zelle: 661-304-3332</div>
         <div>Transport-only · 501(c)3 partner network</div>
         <div><a href="https://www.facebook.com/profile.php?id=100067309983141" target="_blank">Facebook</a></div>
       </div>
